@@ -6,21 +6,13 @@ public class MyFirstProgram1 {
 		hello("user");
 		hello("Andrey");
 
-		double len = 5;
-		System.out.println("Площадь квадрата со стороной " + len +" = " + area(len));
+		Square s = new Square(5);
+		System.out.println("Площадь квадрата со стороной " + s.l + " = " + s.area());			//находит функцию area в классе объекта s. В методе, на ссылаемся на объекты a,b через this
 
-		double a = 8;
-		double b = 9;
-		System.out.println("Площадь квадрата со сторонами " + a + " и " + b + " = " + area(a, b));
+		Rectangle r = new Rectangle(8, 9);
+		System.out.println("Площадь квадрата со сторонами " + r.a + " и " + r.b + " = " + r.area());
 	}
 	public static void hello(String somebody) {
 		System.out.println("Hello, " + somebody + "!");
-	}
-
-	public static double area (double l) {
-		return l * l;
-	}
-	public static double area(double a, double b){
-		return a*b;
 	}
 }

@@ -1,2 +1,6 @@
+ru/stqa/test/sandbox/Square.java
+ ru.stqa.test.sandbox.Square
+ru/stqa/test/sandbox/Rectangle.java
+ ru.stqa.test.sandbox.Rectangle
 ru/stqa/test/sandbox/MyFirstProgram1.java
  ru.stqa.test.sandbox.MyFirstProgram1
