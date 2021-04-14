@@ -4,3 +4,7 @@ ru/stqa/test/sandbox/Rectangle.java
  ru.stqa.test.sandbox.Rectangle
 ru/stqa/test/sandbox/MyFirstProgram1.java
  ru.stqa.test.sandbox.MyFirstProgram1
+ru/stqa/test/sandbox/Point.java
+ ru.stqa.test.sandbox.Point
+ru/stqa/test/sandbox/DZ1.java
+ ru.stqa.test.sandbox.DZ1
