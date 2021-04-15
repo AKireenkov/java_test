@@ -8,3 +8,7 @@ ru/stqa/test/sandbox/Point.java
  ru.stqa.test.sandbox.Point
 ru/stqa/test/sandbox/DZ1.java
  ru.stqa.test.sandbox.DZ1
+ru/stqa/test/sandbox/DZ1_1.java
+ ru.stqa.test.sandbox.DZ1_1
+ru/stqa/test/sandbox/Point1.java
+ ru.stqa.test.sandbox.Point1
