@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.seleniumhq.selenium:selenium-firefox-xpi-driver:4.0.0-beta-3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-firefox-xpi-driver/4.0.0-beta-3/b4f7d355fa3ca462802683ebb39c205b769ddd8e/selenium-firefox-xpi-driver-4.0.0-beta-3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.seleniumhq.selenium/selenium-firefox-xpi-driver/4.0.0-beta-3/acdd8b7f233b0ac018ed21d10451fe455e4c4046/selenium-firefox-xpi-driver-4.0.0-beta-3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
