@@ -1,7 +1,5 @@
 package ru.stqa.test.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -11,8 +9,8 @@ public class ApplicationManager {
   public WebDriver wd;
 
   private SessionHelper sessionHelper;
-  private  NavigationHelper navigationHelper;
-  private  GroupHelper groupHelper;
+  private NavigationHelper navigationHelper;
+  private GroupHelper groupHelper;
 
   public void init() {
     wd = new FirefoxDriver();     //убрали groupHelper. т.к. метод будет пользоваться атрибутом из класса
@@ -25,19 +23,9 @@ public class ApplicationManager {
   }
 
 
-
   public void stop() {
 
     wd.quit();
-  }
-
-  public boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
   }
 
   public GroupHelper getGroupHelper() {
