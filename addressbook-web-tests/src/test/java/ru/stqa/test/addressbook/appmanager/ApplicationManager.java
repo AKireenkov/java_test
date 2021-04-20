@@ -13,7 +13,7 @@ public class ApplicationManager {
   private GroupHelper groupHelper;
 
   public void init() {
-    wd = new FirefoxDriver();     //убрали groupHelper. т.к. метод будет пользоваться атрибутом из класса
+    wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
     groupHelper = new GroupHelper(wd);

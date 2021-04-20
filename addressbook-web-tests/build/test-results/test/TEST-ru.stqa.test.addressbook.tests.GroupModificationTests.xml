@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ru.stqa.test.addressbook.tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-04-20T06:31:16" hostname="DESKTOP-B276SUN" time="1.665">
+<testsuite name="ru.stqa.test.addressbook.tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-04-20T10:09:57" hostname="DESKTOP-B276SUN" time="1.204">
   <properties/>
-  <testcase name="testGroupModification" classname="ru.stqa.test.addressbook.tests.GroupModificationTests" time="1.665"/>
+  <testcase name="testGroupModification" classname="ru.stqa.test.addressbook.tests.GroupModificationTests" time="1.204"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
 SLF4J: Defaulting to no-operation (NOP) logger implementation
 SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-1618900270721	geckodriver	INFO	Listening on 127.0.0.1:5528
-1618900272080	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "0" "-foreground" "-no-remote" "-profile" "C:\\Users\\A4F7~1\\AppData\\Local\\Temp\\rust_mozprofilehHfOhQ"
-1618900272593	Marionette	INFO	Marionette enabled
+1618913392727	geckodriver	INFO	Listening on 127.0.0.1:17452
+1618913393650	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "0" "-foreground" "-no-remote" "-profile" "C:\\Users\\A4F7~1\\AppData\\Local\\Temp\\rust_mozprofileIjwaNc"
+1618913393973	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
-DevTools listening on ws://localhost:63057/devtools/browser/0cd8edec-b3ba-4b48-b902-1d0d8a442df1
-1618900275739	Marionette	INFO	Listening on port 63040
-1618900275761	Marionette	WARN	TLS certificate errors will be ignored for this session
-апр. 20, 2021 9:31:15 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+DevTools listening on ws://localhost:49303/devtools/browser/be26c189-64a2-4795-ba9e-63300542db04
+1618913396151	Marionette	INFO	Listening on port 49288
+1618913396318	Marionette	WARN	TLS certificate errors will be ignored for this session
+апр. 20, 2021 1:09:56 PM org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected dialect: W3C
-1618900278457	Marionette	INFO	Stopped listening on port 63040
+1618913398336	Marionette	INFO	Stopped listening on port 49288
 !!! error running onStopped callback: TypeError: callback is not a function
-1618900279192	RemoteAgent	ERROR	unable to stop listener: [Exception... "Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIWindowMediator.getEnumerator]"  nsresult: "0x8000ffff (NS_ERROR_UNEXPECTED)"  location: "JS frame :: chrome://remote/content/cdp/observers/TargetObserver.jsm :: stop :: line 64"  data: no] Stack trace: stop()@TargetObserver.jsm:64
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1618913398740	RemoteAgent	ERROR	unable to stop listener: [Exception... "Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIWindowMediator.getEnumerator]"  nsresult: "0x8000ffff (NS_ERROR_UNEXPECTED)"  location: "JS frame :: chrome://remote/content/cdp/observers/TargetObserver.jsm :: stop :: line 64"  data: no] Stack trace: stop()@TargetObserver.jsm:64
 unwatchForTabs()@TargetList.jsm:70
 unwatchForTargets()@TargetList.jsm:37
 destructor()@TargetList.jsm:109
