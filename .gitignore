@@ -13,4 +13,6 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 .idea/workspace.xml
-addressbook-web-tests/build/
+
+#git ls-files --others --ignored --exclude-standard
+#addressbook-web-tests/build/
