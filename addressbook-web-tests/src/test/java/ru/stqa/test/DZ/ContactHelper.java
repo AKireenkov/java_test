@@ -2,6 +2,7 @@ package ru.stqa.test.DZ;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class ContactHelper extends Base {
 
@@ -21,6 +22,7 @@ public class ContactHelper extends Base {
     category(By.name("mobile"), contactData.getPhoneM());
     category(By.name("work"), contactData.getPhoneW());
     category(By.name("email"), contactData.getEmail());
+
   }
 
   protected void gotoAddContact() {
