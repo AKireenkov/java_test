@@ -1,6 +1,7 @@
 package ru.stqa.test.DZ;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class Base {
@@ -9,30 +10,29 @@ public class Base {
   public Base(WebDriver wd) {
     this.wd = wd;
   }
+
   protected void click(By position) {
     wd.findElement(position).click();
   }
 
   protected void category(By position, String texts) {
     click(position);
-    wd.findElement(position).clear();
-    wd.findElement(position).sendKeys(texts);
-  }
-}
-  /* private boolean isElementPresent(By by) {    //Лишнее
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
+    if (texts != null) {  //возможность передавать дефолтные значения в поле
+      String existingText = wd.findElement(position).getAttribute("value");
+      if (!texts.equals(existingText)) {    //если передаваемый текст не совпадает с уже существующим
+        wd.findElement(position).clear();
+        wd.findElement(position).sendKeys(texts);
+      }
     }
   }
 
-  private boolean isAlertPresent() {
+  protected boolean isElementPresent(By position) {
     try {
-      wd.switchTo().alert();
+      wd.findElement(position);
       return true;
-    } catch (NoAlertPresentException e) {
+    } catch (NoSuchElementException ex) {
       return false;
     }
-  } */
+  }
+}
+
