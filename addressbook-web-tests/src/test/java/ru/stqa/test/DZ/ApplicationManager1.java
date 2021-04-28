@@ -7,8 +7,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
-import java.util.concurrent.TimeUnit;
-
 public class ApplicationManager1 {
   WebDriver wd;
   private SessionHelper1 sessionHelper1;

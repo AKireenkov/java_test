@@ -2,8 +2,12 @@ package ru.stqa.test.DZ;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends Base {
 
@@ -40,16 +44,50 @@ public class ContactHelper extends Base {
     click(By.linkText("add new"));
   }
 
-  public void editContact() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void editContact(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index - 1).click();
   }
 
   public void updateContact() {
     click(By.xpath("(//input[@name='update'])[2]"));
   }
 
-  public void selectContact() {
-    click(By.id("70"));
+
+  public int getLastnameid() {
+    return lastnameid;
+  }
+
+  public int getFirstnameid() {
+    return firstnameid;
+  }
+
+  public int lastnameid = 2;
+  public int firstnameid = 2;
+
+  public void selectContact(String lastname, String firstname) {
+    String checkbox = "//*[@id=\"maintable\"]/tbody/tr[%d]/td[1]"; //Столбец с чекбоксом
+
+    List<WebElement> elementslastname = wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr/td[2]"));//столбец фамилия
+    for (WebElement element : elementslastname) {
+      String name = element.getText();
+      if (!name.equals(lastname)) {
+        lastnameid += 1;
+      } else {
+        break;
+      }
+    }
+    List<WebElement> elementsfirstname = wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr/td[3]"));//столбец имя
+    for (WebElement element : elementsfirstname) {
+      String name = element.getText();
+      if (!name.equals(firstname)) {
+        firstnameid += 1;
+      } else {
+        break;
+      }
+    }
+    if (lastnameid == firstnameid) {
+      click(By.xpath(String.format(checkbox, lastnameid)));
+    }
   }
 
   public void deleteContact() {
@@ -74,6 +112,22 @@ public class ContactHelper extends Base {
     if (isElementPresent(By.id("maintable"))) { //Проверка на необходимость перехода на страницу
       return;
     }
-    click(By.linkText("home page"));
+    click(By.linkText("home"));
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elementslastname = wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr/td[2]")); //столбец Фамилия
+    List<WebElement> elementsfirstname = wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr/td[3]"));  //столбец имя
+    List<WebElement> entrys = wd.findElements(By.name("entry"));  //элементы каждой строки
+    for (int i = 0; i < elementsfirstname.size(); i++) {
+      String lname = elementslastname.get(i).getText();
+      String fname = elementsfirstname.get(i).getText();
+      WebElement entry = entrys.get(i);
+      int id = Integer.parseInt(entry.findElement(By.tagName("input")).getAttribute("value"));  //находим id элемента
+      ContactData contact = new ContactData(id, fname, lname, null, null, null, null, null, null);
+      contacts.add(contact);
+    }
+    return contacts;
   }
 }
