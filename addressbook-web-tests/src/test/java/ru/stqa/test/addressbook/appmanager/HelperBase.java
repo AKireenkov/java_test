@@ -26,14 +26,16 @@ public class HelperBase {
       }
     }
   }
-  protected boolean isElementPresent(By locator){
+
+  protected boolean isElementPresent(By locator) {
     try {
       wd.findElement(locator);
       return true;
-    } catch (NoSuchElementException ex){
+    } catch (NoSuchElementException ex) {
       return false;
     }
   }
+
   public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
