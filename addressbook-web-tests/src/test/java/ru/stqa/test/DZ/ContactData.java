@@ -1,38 +1,26 @@
 package ru.stqa.test.DZ;
 
 public class ContactData {
-  private int id;
-  private final String firstname;
-  private final String lastname;
-  private final String address;
-  private final String phoneH;
-  private final String phoneM;
-  private final String phoneW;
-  private final String email;
-  private String group;
+  private int id = 0;
+  private String firstname;
+  private String lastname;
+  private String address;
 
-  public ContactData(int id, String firstname, String lastname, String address, String phoneH, String phoneM, String phoneW, String email, String group) {
-    this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.address = address;
-    this.phoneH = phoneH;
-    this.phoneM = phoneM;
-    this.phoneW = phoneW;
-    this.email = email;
-    this.group = group;
+
+  private String phoneH;
+  private String phoneM;
+  private String phoneW;
+  private String email;
+  private String group;
+  private String allPhones;
+
+  public String getAllPhones() {
+    return allPhones;
   }
 
-  public ContactData(String firstname, String lastname, String address, String phoneH, String phoneM, String phoneW, String email, String group) {
-    this.id = 0;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.address = address;
-    this.phoneH = phoneH;
-    this.phoneM = phoneM;
-    this.phoneW = phoneW;
-    this.email = email;
-    this.group = group;
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
   }
 
   public String getFirstname() {
@@ -67,8 +55,49 @@ public class ContactData {
     return group;
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withPhoneH(String phoneH) {
+    this.phoneH = phoneH;
+    return this;
+  }
+
+  public ContactData withPhoneM(String phoneM) {
+    this.phoneM = phoneM;
+    return this;
+  }
+
+  public ContactData withPhoneW(String phoneW) {
+    this.phoneW = phoneW;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
   }
 
   public int getId() {

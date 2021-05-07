@@ -1,6 +1,5 @@
 package ru.stqa.test.DZ;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -32,16 +31,11 @@ public class ApplicationManager1 {
     sessionHelper1.login("admin", "secret");
   }
 
-
-  protected void returnHomePage() {
-    wd.findElement(By.linkText("home page")).click();
-  }
-
   protected void stop() {
     wd.quit();
   }
 
-  public ContactHelper getContactHelper() {
+  public ContactHelper contact() {
     return contactHelper;
   }
 }

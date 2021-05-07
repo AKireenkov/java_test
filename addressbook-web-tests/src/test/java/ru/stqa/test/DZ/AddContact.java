@@ -1,29 +1,42 @@
 package ru.stqa.test.DZ;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
-import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddContact extends TestBase1 {
 
   @Test
   public void testAddContact() throws Exception {
-    List<ContactData> before = app1.getContactHelper().getContactList();
-    ContactData contact = new ContactData("aa", "aa", "test3", "test4", "test5", "test6", "test7", "test4");
-    app1.getContactHelper().createContact(contact, true);
-    app1.returnHomePage();
-    List<ContactData> after = app1.getContactHelper().getContactList();
-    Assert.assertEquals(before.size() + 1, after.size());
+    Contacts before = app1.contact().list();
+    ContactData contact = new ContactData().withFirstname("TT").withLastname("TT").withAddress("test3").withPhoneH("test4").withPhoneM("test5").withPhoneW("test6").withEmail("test7").withGroup("test4");
+    app1.contact().create(contact, true);
+    assertThat(app1.contact().count(), equalTo(before.size() + 1));
+    Contacts after = app1.contact().list();
 
-
-    contact.setId(after.stream().max((c1, c2) -> Integer.compare(c1.getId(), c2.getId())).get().getId()); //находим максимальный id(это id нового элемента)
-    before.add(contact);
+    contact.withId(after.stream().max((c1, c2) -> Integer.compare(c1.getId(), c2.getId())).get().getId()); //находим максимальный id(это id нового элемента)
     Comparator<? super ContactData> byID = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
     before.sort(byID);
     after.sort(byID);
-    Assert.assertEquals(before, after);
+    assertThat(after, equalTo(before.withAdded(contact)));
+  }
+
+  @Test
+  public void testBadAddContact() throws Exception {    //проверка: если добаввляем контакт в некорректном формате, размер списка не меняется
+    Contacts before = app1.contact().list();
+    ContactData contact = new ContactData().withFirstname("zz'").withLastname("zz").withAddress("test3").withPhoneH("test4").withPhoneM("test5").withPhoneW("test6").withEmail("test7").withGroup("test4");
+    app1.contact().create(contact, true);
+    assertThat(app1.contact().count(), equalTo(before.size()));
+    Contacts after = app1.contact().list();
+
+    contact.withId(after.stream().max((c1, c2) -> Integer.compare(c1.getId(), c2.getId())).get().getId());
+    Comparator<? super ContactData> byID = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+    before.sort(byID);
+    after.sort(byID);
+    assertThat(after, equalTo(before));
   }
 
 }
