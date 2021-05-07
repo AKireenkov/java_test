@@ -1,6 +1,7 @@
-package ru.stqa.test.DZ;
+package ru.stqa.test.DZ.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.test.DZ.model.ContactData;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;

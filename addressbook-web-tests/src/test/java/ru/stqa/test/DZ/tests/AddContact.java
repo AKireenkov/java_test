@@ -1,9 +1,9 @@
-package ru.stqa.test.DZ;
+package ru.stqa.test.DZ.tests;
 
 import org.testng.annotations.Test;
-
+import ru.stqa.test.DZ.model.ContactData;
+import ru.stqa.test.DZ.model.Contacts;
 import java.util.Comparator;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -12,7 +12,7 @@ public class AddContact extends TestBase1 {
   @Test
   public void testAddContact() throws Exception {
     Contacts before = app1.contact().list();
-    ContactData contact = new ContactData().withFirstname("TT").withLastname("TT").withAddress("test3").withPhoneH("test4").withPhoneM("test5").withPhoneW("test6").withEmail("test7").withGroup("test4");
+    ContactData contact = new ContactData().withFirstname("UUU").withLastname("UUU").withAddress("test3").withPhoneH("test4").withPhoneM("test5").withPhoneW("test6").withEmail("test7").withGroup("test4");
     app1.contact().create(contact, true);
     assertThat(app1.contact().count(), equalTo(before.size() + 1));
     Contacts after = app1.contact().list();

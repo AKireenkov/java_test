@@ -1,4 +1,4 @@
-package ru.stqa.test.DZ;
+package ru.stqa.test.DZ.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

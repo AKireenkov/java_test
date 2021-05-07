@@ -1,4 +1,4 @@
-package ru.stqa.test.DZ;
+package ru.stqa.test.DZ.model;
 
 import com.google.common.collect.ForwardingList;
 import java.util.ArrayList;

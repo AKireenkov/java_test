@@ -1,8 +1,9 @@
-package ru.stqa.test.DZ;
+package ru.stqa.test.DZ.tests;
 
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import ru.stqa.test.DZ.appmanager.ApplicationManager1;
 
 public class TestBase1 {
 

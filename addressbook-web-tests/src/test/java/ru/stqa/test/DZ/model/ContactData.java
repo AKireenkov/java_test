@@ -1,12 +1,10 @@
-package ru.stqa.test.DZ;
+package ru.stqa.test.DZ.model;
 
 public class ContactData {
   private int id = 0;
   private String firstname;
   private String lastname;
   private String address;
-
-
   private String phoneH;
   private String phoneM;
   private String phoneW;

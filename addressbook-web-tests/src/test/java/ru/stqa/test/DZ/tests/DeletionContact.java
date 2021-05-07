@@ -1,7 +1,11 @@
-package ru.stqa.test.DZ;
+package ru.stqa.test.DZ.tests;
 
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.test.DZ.model.ContactData;
+import ru.stqa.test.DZ.model.Contacts;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -20,7 +24,7 @@ public class DeletionContact extends TestBase1 {
     String lastname = "zz";
     String firstname = "zz";
     app1.contact().delete(lastname, firstname);
-    assertThat(app1.contact().count(), equalTo(before.size() - 1));//сравниваем размеры списков до/после
+    MatcherAssert.assertThat(app1.contact().count(), equalTo(before.size() - 1));//сравниваем размеры списков до/после
     Contacts after = app1.contact().list();
 
     assertThat(after, equalTo(before.without(app1.contact().lastnameid - 2)));   //сравниваем переменные

@@ -1,4 +1,4 @@
-package ru.stqa.test.DZ;
+package ru.stqa.test.DZ.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,7 +16,7 @@ public class ApplicationManager1 {
     this.browser = browser;
   }
 
-  protected void init() {
+  public void init() {
     if (browser.equals(BrowserType.CHROME)) {
       wd = new ChromeDriver();
     } else if (browser.equals(BrowserType.FIREFOX)) {
@@ -31,7 +31,7 @@ public class ApplicationManager1 {
     sessionHelper1.login("admin", "secret");
   }
 
-  protected void stop() {
+  public void stop() {
     wd.quit();
   }
 
