@@ -10,4 +10,6 @@ dependencies {
     implementation 'org.testng:testng:7.4.0'
     implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-3'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    implementation 'com.beust:jcommander:1.81'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.16'
 }

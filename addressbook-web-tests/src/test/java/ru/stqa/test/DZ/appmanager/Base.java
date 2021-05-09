@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+
 public class Base {
   protected WebDriver wd;
 
@@ -23,6 +25,12 @@ public class Base {
         wd.findElement(position).clear();
         wd.findElement(position).sendKeys(texts);
       }
+    }
+  }
+
+  protected void attach(By position, File file) {
+    if (file != null) {  //возможность передавать дефолтные значения в поле
+        wd.findElement(position).sendKeys(file.getAbsolutePath());
     }
   }
 
