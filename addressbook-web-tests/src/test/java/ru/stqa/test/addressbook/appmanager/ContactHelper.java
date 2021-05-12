@@ -1,4 +1,4 @@
-package ru.stqa.test.DZ.appmanager;
+package ru.stqa.test.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -6,11 +6,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.test.DZ.model.ContactData;
-import ru.stqa.test.DZ.model.Contacts;
+import ru.stqa.test.addressbook.model.ContactData;
+import ru.stqa.test.addressbook.model.Contacts;
+
 import java.util.List;
 
-public class ContactHelper extends Base {
+public class ContactHelper extends HelperBase {
+
+  public int lastnameid = 2;
+  public int firstnameid = 2;
+  private Contacts contactCache = null;   //кеширование списка контактов
 
   public ContactHelper(WebDriver wd) {
     super(wd);
@@ -21,14 +26,14 @@ public class ContactHelper extends Base {
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
-    category(By.name("firstname"), contactData.getFirstname());
-    category(By.name("lastname"), contactData.getLastname());
+    type(By.name("firstname"), contactData.getFirstname());
+    type(By.name("lastname"), contactData.getLastname());
     attach(By.name("photo"), contactData.getPhoto());
-    category(By.name("address"), contactData.getAddress());
-    category(By.name("home"), contactData.getPhoneH());
-    category(By.name("mobile"), contactData.getPhoneM());
-    category(By.name("work"), contactData.getPhoneW());
-    category(By.name("email"), contactData.getEmail());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("home"), contactData.getPhoneH());
+    type(By.name("mobile"), contactData.getPhoneM());
+    type(By.name("work"), contactData.getPhoneW());
+    type(By.name("email"), contactData.getEmail());
 
     if (creation) {   //если true -> мы на форме создания
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup()); //выбираем группу из выпадающего списка
@@ -46,21 +51,13 @@ public class ContactHelper extends Base {
     click(By.linkText("add new"));
   }
 
-  public void editContact(int index) {
-    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index - 1).click();
-
-  }
-
   public void updateContact() {
     click(By.xpath("(//input[@name='update'])[2]"));
   }
 
-  public int getFirstnameid() {
-    return firstnameid;
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector(String.format("input[value='%s']", id))).click();    //находим кол-во записей в списке, и выбираем по индексу
   }
-
-  public int lastnameid = 2;
-  public int firstnameid = 2;
 
   public void selectContact(String lastname, String firstname) {
     String checkbox = "//*[@id=\"maintable\"]/tbody/tr[%d]/td[1]"; //Столбец с чекбоксом
@@ -104,16 +101,16 @@ public class ContactHelper extends Base {
     homePage();
   }
 
-  public void modify(int index, ContactData contact) {
-    editContact(index);
+  public void modify(ContactData contact) {
+    editContactById(contact.getId());
     fillContactForm(contact, false);
     updateContact();
     contactCache = null;
     homePage();
   }
 
-  public void delete(String lastname, String firstname) {
-    selectContact(lastname, firstname);
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
     deleteContact();
     acceptDelete();
     contactCache = null;//сбрасываем кеш после изменения списка групп
@@ -127,9 +124,7 @@ public class ContactHelper extends Base {
     click(By.linkText("home"));
   }
 
-  private Contacts contactCache = null;   //кеширование списка контактов
-
-  public Contacts list() {
+  public Contacts all() {
     if (contactCache != null) {
       return new Contacts(contactCache);  //возвращаем копию кеша
     }

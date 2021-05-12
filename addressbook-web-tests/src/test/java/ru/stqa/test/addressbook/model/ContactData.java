@@ -1,4 +1,4 @@
-package ru.stqa.test.DZ.model;
+package ru.stqa.test.addressbook.model;
 
 import java.io.File;
 
