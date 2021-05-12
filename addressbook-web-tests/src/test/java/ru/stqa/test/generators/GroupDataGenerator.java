@@ -63,17 +63,17 @@ public class GroupDataGenerator {
     XStream xstream = new XStream();
     xstream.processAnnotations(GroupData.class);//другой вариант xstream.alias("group", GroupData.class);
     String xml = xstream.toXML(groups);
-    try ( Writer writer = new FileWriter(file)) {
+    try (Writer writer = new FileWriter(file)) {
       writer.write(xml);
     }
   }
 
   private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
-   try(Writer writer = new FileWriter(file)) {
-     for (GroupData group : groups) {
-       writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
-     }
-   }
+    try (Writer writer = new FileWriter(file)) {
+      for (GroupData group : groups) {
+        writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
+      }
+    }
   }
 
   private List<GroupData> generateGroups(int count) {

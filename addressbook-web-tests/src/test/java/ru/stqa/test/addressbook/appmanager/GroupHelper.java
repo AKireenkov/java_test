@@ -10,17 +10,6 @@ import java.util.List;
 
 public class GroupHelper extends HelperBase {
 
-  /*public List<GroupData> list() {
-    List<GroupData> groups = new ArrayList<GroupData>();    //создаем список типа GroupData
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));  //создаем список объектов. Находит все элементы тэг span и класс group
-    for (WebElement element : elements) {   //проходим по списку elements
-      String name = element.getText();    //проходим по списку elements и получаем их текст
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));  //Integer.parseInt преобразовывает строку в число
-      groups.add(new GroupData().withId(id).withName(name));    //добавляем созданный объект в список
-    }
-    return groups;    //возвращаем список
-  }
-*/
   private Groups groupCache = null;
 
   public GroupHelper(WebDriver wd) {
