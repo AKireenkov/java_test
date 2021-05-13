@@ -28,8 +28,8 @@ public class ApplicationManager {
   }
 
   public void init() throws IOException {
-    String target = System.getProperty("target", "local");
-    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    String target = System.getProperty("target", "local");   //используем конфиг файл
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));//загружаем файл
     if (browser.equals(BrowserType.FIREFOX)) {
       wd = new FirefoxDriver();
     } else if (browser.equals(BrowserType.CHROME)) {
@@ -38,7 +38,7 @@ public class ApplicationManager {
       wd = new InternetExplorerDriver();
     }
     wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    wd.get(properties.getProperty("web.baseUrl"));
+    wd.get(properties.getProperty("web.baseUrl"));  //используем св-во из внешнего файла
     groupHelper = new GroupHelper(wd);
     contactHelper = new ContactHelper(wd);
     navigationHelper = new NavigationHelper(wd);

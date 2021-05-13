@@ -28,11 +28,11 @@ public class GroupDataGenerator {
 
   public static void main(String[] args) throws IOException {
     GroupDataGenerator generator = new GroupDataGenerator();
-    JCommander jCommander = new JCommander(generator);
+    JCommander jCommander = new JCommander(generator);  //в generator заполняем атрибуты
     try {
-      jCommander.parse(args);
-    } catch (ParameterException ex) {
-      jCommander.usage();
+      jCommander.parse(args);   //запускаем jCommander с переданными значениями
+    } catch (ParameterException ex) {   //перехватываем исключение
+      jCommander.usage(); //вывод текста с доступными опциями
       return;
     }
     generator.run();
@@ -53,16 +53,19 @@ public class GroupDataGenerator {
 
   private void saveAsJson(List<GroupData> groups, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    //setPrettyPrinting()
+    //excludeFieldsWithoutExposeAnnotation() пропускает все поля, не помеченные @Expouse
     String json = gson.toJson(groups);
-    try (Writer writer = new FileWriter(file)) {
-      writer.write(json);
-    }
+    try (Writer writer = new FileWriter(file)) {    //try (инициализация ресурса)
+      writer.write(json);   //использование
+    }     //закрывается автоматически
   }
 
   private void saveAsXml(List<GroupData> groups, File file) throws IOException {
     XStream xstream = new XStream();
-    xstream.processAnnotations(GroupData.class);//другой вариант xstream.alias("group", GroupData.class);
-    String xml = xstream.toXML(groups);
+    xstream.processAnnotations(GroupData.class);//помечаем @XStreamOmitField, которые не нужно включать;
+    // @XStreamOmitField - без xstream.alias("group", GroupData.class);
+    String xml = xstream.toXML(groups); //превращаем groups в строку в формате xml
     try (Writer writer = new FileWriter(file)) {
       writer.write(xml);
     }

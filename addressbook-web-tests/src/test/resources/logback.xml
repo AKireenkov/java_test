@@ -4,7 +4,6 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>test-${bySecond}.log</file>
-        <append>true</append>
         <!-- set immediateFlush to false for much higher logging throughput -->
         <immediateFlush>true</immediateFlush>
         <!-- encoders are assigned the type

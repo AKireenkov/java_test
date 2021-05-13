@@ -1,8 +1,8 @@
 package ru.stqa.test.addressbook.tests;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
-import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.test.addressbook.model.GroupData;
@@ -29,17 +29,18 @@ public class GroupCreationTests extends TestBase {
       while (line != null) {
         xml += line;
         line = reader.readLine();
-      }
+      } //читаем строки пока line не пустая строка
       XStream xstream = new XStream();
       xstream.processAnnotations(GroupData.class);
       List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
-      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator(); //к каждому объекту применяем ф-ию, которая преобразовывает объект в массив
+      //преобразовываем в список toList ,возвращаем Iterator
     }
   }
 
   @DataProvider   //провайдер данных
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.json"))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.json"))) {  //читаем содержимое
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -47,8 +48,8 @@ public class GroupCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() {
-      }.getType()); //List <GroupData>.class;
+      List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>() { //передается строка и тип данных
+      }.getType()); // ==List <GroupData>.class;
       return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
   }
