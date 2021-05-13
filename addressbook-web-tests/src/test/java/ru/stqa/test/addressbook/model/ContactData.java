@@ -1,16 +1,26 @@
 package ru.stqa.test.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 
 public class ContactData {
   private int id = 0;
+  @Expose
   private String firstname;
+  @Expose
   private String lastname;
+  @Expose
   private String address;
+  @Expose
   private String phoneH;
+  @Expose
   private String phoneM;
+  @Expose
   private String phoneW;
+  @Expose
   private String email;
+  @Expose
   private String group;
   private String allPhones;
   private File photo;
