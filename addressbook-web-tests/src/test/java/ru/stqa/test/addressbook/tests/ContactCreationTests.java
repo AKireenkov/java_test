@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.test.addressbook.model.ContactData;
 import ru.stqa.test.addressbook.model.Contacts;
+import ru.stqa.test.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,8 +49,10 @@ public class ContactCreationTests extends TestBase {
 
   @Test(enabled = false)
   public void testBadAddContact() throws Exception {    //проверка: если добаввляем контакт в некорректном формате, размер списка не меняется
+    Groups groups = app.db().groups();
     Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withFirstname("zz'").withLastname("zz").withAddress("test3").withPhoneH("test4").withPhoneM("test5").withPhoneW("test6").withEmail("test7").withGroup("test4");
+    ContactData contact = new ContactData().withFirstname("zz'").withLastname("zz").withAddress("test3")
+            .withPhoneH("test4").withPhoneM("test5").withPhoneW("test6").withEmail("test7").inGroup(groups.iterator().next());
     app.contact().create(contact, true);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();

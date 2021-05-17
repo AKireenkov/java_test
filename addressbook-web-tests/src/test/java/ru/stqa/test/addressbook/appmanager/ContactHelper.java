@@ -36,7 +36,10 @@ public class ContactHelper extends HelperBase {
     type(By.name("email"), contactData.getEmail());
 
     if (creation) {   //если true -> мы на форме создания
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup()); //выбираем группу из выпадающего списка
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());//выбираем группу из выпадающего списка
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group"))); //на форме редакитования выбора группы быть не должно
     }
