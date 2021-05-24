@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.stqa.test.addressbook.model.ContactData;
@@ -41,5 +42,17 @@ public class HbConnectionTest {
       System.out.println(contact);
       System.out.println(contact.getGroups());
     }
+  }
+
+  @Test
+  public void getContacts() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    Query result = session.createQuery("from ContactData where id = :paramName");
+    result.setParameter("paramName", 156);
+    List<ContactData> contact = result.list();
+    session.getTransaction().commit();
+    session.close();
+    System.out.println(contact);
   }
 }
