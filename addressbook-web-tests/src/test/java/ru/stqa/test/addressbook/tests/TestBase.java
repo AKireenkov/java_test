@@ -19,9 +19,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBase {
-  Logger logger = LoggerFactory.getLogger(TestBase.class);  //инициализация
-
   protected static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));  //добавлена возможность выбора браузера
+  Logger logger = LoggerFactory.getLogger(TestBase.class);  //инициализация
 
   @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {

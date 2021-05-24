@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.test.addressbook.model.ContactData;
 import ru.stqa.test.addressbook.model.Contacts;
+import ru.stqa.test.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ContactHelper extends HelperBase {
   public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
-    attach(By.name("photo"), contactData.getPhoto());
+    //attach(By.name("photo"), contactData.getPhoto());
     type(By.name("address"), contactData.getAddress());
     type(By.name("home"), contactData.getPhoneH());
     type(By.name("mobile"), contactData.getPhoneM());
@@ -37,7 +38,7 @@ public class ContactHelper extends HelperBase {
 
     if (creation) {   //если true -> мы на форме создания
       if (contactData.getGroups().size() > 0) {
-        Assert.assertTrue(contactData.getGroups().size() == 1);
+        Assert.assertTrue(contactData.getGroups().size() == 1);//проверка, что пытаемся добавить контакт только в одну группу
         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());//выбираем группу из выпадающего списка
       }
     } else {
@@ -101,7 +102,6 @@ public class ContactHelper extends HelperBase {
     fillContactForm(contact, creation);
     submitAddContact();
     contactCache = null;
-    homePage();
   }
 
   public void modify(ContactData contact) {
@@ -109,7 +109,6 @@ public class ContactHelper extends HelperBase {
     fillContactForm(contact, false);
     updateContact();
     contactCache = null;
-    homePage();
   }
 
   public void delete(ContactData contact) {
@@ -117,14 +116,19 @@ public class ContactHelper extends HelperBase {
     deleteContact();
     acceptDelete();
     contactCache = null;//сбрасываем кеш после изменения списка групп
-    homePage();
   }
 
-  public void homePage() {
-    if (isElementPresent(By.id("maintable"))) { //Проверка на необходимость перехода на страницу
-      return;
-    }
-    click(By.linkText("home"));
+  public void selectGroupFilter(GroupData group) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+  }
+
+  public void addContactToGroup(GroupData group) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());//выбираем группу из выпадающего списка
+    click(By.name("add"));
+  }
+
+  public void submitContactDeleteFromGroup() {
+    click(By.name("remove"));
   }
 
   public Contacts all() {
@@ -183,4 +187,6 @@ public class ContactHelper extends HelperBase {
   private void detailsContactById(int id) {   //переходи на форму детали контакта по его id
     wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
   }
+
+
 }

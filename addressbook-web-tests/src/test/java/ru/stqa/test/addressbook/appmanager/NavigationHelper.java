@@ -17,4 +17,11 @@ public class NavigationHelper extends HelperBase {
     }
     click(By.linkText("groups"));
   }
+
+  public void homePage() {
+    if (isElementPresent(By.id("maintable"))) { //Проверка на необходимость перехода на страницу
+      return;
+    }
+    click(By.linkText("home"));
+  }
 }

@@ -52,9 +52,9 @@ public class ContactDataGenerator extends TestBase {
     List<ContactData> contacts = new ArrayList<>();
 
     for (int i = 0; i < count; i++) {
-      //  contacts.add(new ContactData().withFirstname(String.format("firstname %s", i)).withLastname(String.format("lastname %s", i))
-      //  .withAddress(String.format("address %s", i)).withEmail(String.format("email %s", i)).withPhoneH(String.format("home %s", i))
-      //    .withPhoneM(String.format("mobile %s", i)).withPhoneW(String.format("work %s", i)).inGroup(String.format("home %s", i)));
+        contacts.add(new ContactData().withFirstname(String.format("firstname %s", i)).withLastname(String.format("lastname %s", i))
+        .withAddress(String.format("address %s", i)).withEmail(String.format("email %s", i)).withPhoneH(String.format("home %s", i))
+        .withPhoneM(String.format("mobile %s", i)).withPhoneW(String.format("work %s", i)).withGroup(String.format("test %s", i)));
     }
     return contacts;
   }

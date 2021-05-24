@@ -17,7 +17,7 @@ public class ContactPhoneTest extends TestBase {
 
   @Test(enabled = false)
   public void testContactPhones() {   //сравнение контакта на форме редактирования и на главной странице
-    app.contact().homePage();
+    app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditFrom = app.contact().infoFromEditForm(contact);
 
@@ -28,7 +28,7 @@ public class ContactPhoneTest extends TestBase {
 
   @Test
   public void testDetailsContactPhones() {   //сравнение контакта на форме Редактирования и Детали контакта
-    app.contact().homePage();
+    app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromDetailsFrom = app.contact().infoFromDetailsFrom(contact);
     ContactData contactInfoFromEditFrom = app.contact().infoFromEditForm(contact);

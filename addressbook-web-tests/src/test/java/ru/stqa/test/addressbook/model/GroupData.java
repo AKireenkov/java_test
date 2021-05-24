@@ -21,6 +21,16 @@ public class GroupData {
   @Expose //помечает поля которые нужно включить в json
   @Column(name = "group_name")
   private String name;
+  @Expose
+  @Column(name = "group_header")
+  @Type(type = "text")  //описание типа переменной
+  private String header;
+  @Expose
+  @Column(name = "group_footer")
+  @Type(type = "text")
+  private String footer;
+  @ManyToMany(mappedBy = "groups")
+  private final Set<ContactData> contacts = new HashSet<>();
 
   @Override
   public boolean equals(Object o) {
@@ -43,20 +53,6 @@ public class GroupData {
     result = 31 * result + (footer != null ? footer.hashCode() : 0);
     return result;
   }
-
-  @Expose
-  @Column(name = "group_header")
-  @Type(type = "text")  //описание типа переменной
-  private String header;
-
-  @Expose
-  @Column(name = "group_footer")
-  @Type(type = "text")
-  private String footer;
-
-
-  @ManyToMany(mappedBy = "groups")
-  private Set<ContactData> contacts = new HashSet<>();
 
   public Contacts getContacts() {
     return new Contacts(contacts);

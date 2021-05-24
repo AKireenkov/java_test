@@ -56,11 +56,13 @@ public class ContactData {
   @Type(type = "text")
   private String photo;
 
-  // private String group;
+  @Expose
+  @Transient
+  private String group;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
-  private Set<GroupData> groups = new HashSet<GroupData>();
+  private final Set<GroupData> groups = new HashSet<GroupData>();
 
   public File getPhoto() {
     return new File(photo);
@@ -110,6 +112,16 @@ public class ContactData {
 
   public Groups getGroups() {
     return new Groups(groups);
+  }
+
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
   }
 
   public ContactData withId(int id) {
@@ -162,6 +174,13 @@ public class ContactData {
             "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            ", phoneH='" + phoneH + '\'' +
+            ", phoneM='" + phoneM + '\'' +
+            ", phoneW='" + phoneW + '\'' +
+            ", email='" + email + '\'' +
+            ", allPhones='" + allPhones + '\'' +
+            ", groups=" + groups +
             '}';
   }
 
@@ -174,7 +193,14 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
+    if (phoneH != null ? !phoneH.equals(that.phoneH) : that.phoneH != null) return false;
+    if (phoneM != null ? !phoneM.equals(that.phoneM) : that.phoneM != null) return false;
+    if (phoneW != null ? !phoneW.equals(that.phoneW) : that.phoneW != null) return false;
+    if (email != null ? !email.equals(that.email) : that.email != null) return false;
+    if (allPhones != null ? !allPhones.equals(that.allPhones) : that.allPhones != null) return false;
+    return groups != null ? groups.equals(that.groups) : that.groups == null;
   }
 
   @Override
@@ -182,11 +208,13 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (phoneH != null ? phoneH.hashCode() : 0);
+    result = 31 * result + (phoneM != null ? phoneM.hashCode() : 0);
+    result = 31 * result + (phoneW != null ? phoneW.hashCode() : 0);
+    result = 31 * result + (email != null ? email.hashCode() : 0);
+    result = 31 * result + (allPhones != null ? allPhones.hashCode() : 0);
+    result = 31 * result + (groups != null ? groups.hashCode() : 0);
     return result;
-  }
-
-  public ContactData inGroup(GroupData group) {
-    groups.add(group);
-    return this;
   }
 }
