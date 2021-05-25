@@ -1,4 +1,4 @@
-package ru.stqa.test.generators;
+package ru.stqa.test.addressbook.generators;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
