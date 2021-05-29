@@ -12,37 +12,34 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import static jdk.nashorn.internal.runtime.Debug.id;
-
 public class ApplicationManager {
   private final Properties properties;
+  private final String browser;
   public WebDriver wd;
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
 
-
   public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
   }
 
-  private final String browser;
-
   public void init() throws IOException {
-    String target = System.getProperty("target", "local");   //используем конфиг файл
-    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));//загружаем файл
+    String target = System.getProperty("target", "local");   //РёСЃРїРѕР»СЊР·СѓРµРј РєРѕРЅС„РёРі С„Р°Р№Р»
+    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));//Р·Р°РіСЂСѓР¶Р°РµРј С„Р°Р№Р»
 
   }
+
   public void stop() {
-    if (wd !=null) {
+    if (wd != null) {
       wd.quit();
     }
   }
 
-  public HttpSession newSession(){
-    return new HttpSession(this); //позволяет создавать несколько сессий одновременно, например, с разными учетками
+  public HttpSession newSession() {
+    return new HttpSession(this); //РїРѕР·РІРѕР»СЏРµС‚ СЃРѕР·РґР°РІР°С‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ СЃРµСЃСЃРёР№ РѕРґРЅРѕРІСЂРµРјРµРЅРЅРѕ, РЅР°РїСЂРёРјРµСЂ, СЃ СЂР°Р·РЅС‹РјРё СѓС‡РµС‚РєР°РјРё
   }
 
   public String getProperty(String key) {
@@ -50,22 +47,22 @@ public class ApplicationManager {
   }
 
   public RegistrationHelper registration() {
-    if (registrationHelper ==null) {
+    if (registrationHelper == null) {
       registrationHelper = new RegistrationHelper(this);
     }
     return registrationHelper;
   }
 
-  public FtpHelper ftp(){
-    if (ftp ==null) {
+  public FtpHelper ftp() {
+    if (ftp == null) {
       ftp = new FtpHelper(this);
     }
     return ftp;
   }
 
-  //Использование драйвера только в момент вызова
+  //РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РґСЂР°Р№РІРµСЂР° С‚РѕР»СЊРєРѕ РІ РјРѕРјРµРЅС‚ РІС‹Р·РѕРІР°
   public WebDriver getDriver() {
-    if (wd ==null){
+    if (wd == null) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
       } else if (browser.equals(BrowserType.CHROME)) {
@@ -74,22 +71,22 @@ public class ApplicationManager {
         wd = new InternetExplorerDriver();
       }
       wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-      wd.get(properties.getProperty("web.baseUrl"));  //используем св-во из внешнего файла
+      wd.get(properties.getProperty("web.baseUrl"));  //РёСЃРїРѕР»СЊР·СѓРµРј СЃРІ-РІРѕ РёР· РІРЅРµС€РЅРµРіРѕ С„Р°Р№Р»Р°
     }
     return wd;
   }
 
-  public MailHelper mail(){
-    if (mailHelper ==null){
+  public MailHelper mail() {
+    if (mailHelper == null) {
       mailHelper = new MailHelper(this);
     }
     return mailHelper;
   }
 
-  public JamesHelper james(){
-    if (jamesHelper == null){
+  public JamesHelper james() {
+    if (jamesHelper == null) {
       jamesHelper = new JamesHelper(this);
     }
-    return  jamesHelper;
+    return jamesHelper;
   }
 }
