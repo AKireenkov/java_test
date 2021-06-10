@@ -20,6 +20,7 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
+  private YandexHelper yandexHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -60,8 +61,8 @@ public class ApplicationManager {
     return ftp;
   }
 
-  //Использование драйвера только в момент вызова
-  public WebDriver getDriver() {
+
+  public WebDriver getDriver() { //спользование драйвера только в момент вызова
     if (wd == null) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -88,5 +89,12 @@ public class ApplicationManager {
       jamesHelper = new JamesHelper(this);
     }
     return jamesHelper;
+  }
+
+  public YandexHelper yandex() {
+    if (yandexHelper == null) {
+      yandexHelper = new YandexHelper(this);
+    }
+    return yandexHelper;
   }
 }

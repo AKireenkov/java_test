@@ -1,6 +1,5 @@
 package ru.stqa.test.mantis.tests;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.test.mantis.model.MailMessage;
@@ -13,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 
 public class RegistrationTests extends TestBase {
 
-  @BeforeMethod
+  // @BeforeMethod //вкл для встроенного почтового сервера
   public void startMailServer() {
     app.mail().start();
   }
@@ -23,11 +22,12 @@ public class RegistrationTests extends TestBase {
     long now = System.currentTimeMillis();
     String user = String.format("user%s", now);
     String password = "password";
-    String email = String.format("user%s@localhost.localdomain", now);
-    app.james().createUser(user, password);
+    String email = String.format("akireenkovtest+%s@yandex.ru", now);
+    //app.yandex().createUser(user, password);
     app.registration().start(user, email);
+    app.yandex().initSession();
     // List<MailMessage> mailMessages = app.mail().waitForMail(2, 100000);
-    List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
+    List<MailMessage> mailMessages = app.yandex().waitForMail(user, password, 60000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
     app.registration().finish(confirmationLink, password);
     assertTrue(app.newSession().login(user, password));
@@ -39,7 +39,7 @@ public class RegistrationTests extends TestBase {
     return regex.getText(mailMessage.text);
   }
 
-  // @AfterMethod(alwaysRun = true)
+  // @AfterMethod(alwaysRun = true)   //вкл для встроенного почтового сервера
   public void stopMailServer() {
     app.mail().stop();
   }

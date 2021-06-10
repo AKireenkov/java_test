@@ -16,10 +16,9 @@ public class JamesHelper {
   private final ApplicationManager app;
 
   private final TelnetClient telnet;
+  private final Session mailSession;
   private InputStream in;
   private PrintStream out;
-
-  private final Session mailSession;
   private Store store;
   private String mailserver;
 
@@ -65,6 +64,8 @@ public class JamesHelper {
     closeTelnetSession();
   }
 
+
+  //создаем соединение через telnet, для создания пользователя от имени root
   private void initTelnetSession() {
     mailserver = app.getProperty("mailserver.host");
     int port = Integer.parseInt(app.getProperty("mailserver.port"));
@@ -127,7 +128,7 @@ public class JamesHelper {
     write("quit");
   }
 
-  public void drainEmail(String username, String password) throws MessagingException {  //удаляет все письма польхователя, очистить почтовый ящик
+  public void drainEmail(String username, String password) throws MessagingException {  //удаляет все письма пользователя, очистить почтовый ящик
     Folder inbox = openInbox(username, password);
     for (Message message : inbox.getMessages()) {
       message.setFlag(Flags.Flag.DELETED, true);  //каждое сообщение помечаем флагом DELETED
